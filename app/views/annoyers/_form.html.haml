@@ -1,0 +1,37 @@
+= form_for @annoyer do |f|
+  - if @annoyer.errors.any?
+    %div{ :class => "alert alert-danger" }
+      %strong There has been an error:
+      = @annoyer.errors.full_messages.first
+  %hr
+  %p just enter an Annoyer name, to annoy you:
+  %p
+    %div{ :class => 'input-group input-group-lg' }
+      %span{ :class => 'input-group-addon' }
+        %span{ :class => 'glyphicon glyphicon-font' }
+      = f.text_field :title, :class => 'form-control'
+  %hr
+  %p and pick a color of your choice:
+  %div{ :class => 'row'}
+    %div{ :class => 'col-md-2'}
+      = f.radio_button :color, '0433ff'
+      %span{ :class => 'glyphicon glyphicon-tint', :style => 'color:#0433ff;font-size:20px;'}
+    %div{ :class => 'col-md-2'}
+      = f.radio_button :color, 'aa7942'
+      %span{ :class => 'glyphicon glyphicon-tint', :style => 'color:#aa7942;font-size:20px;'}
+    %div{ :class => 'col-md-2'}
+      = f.radio_button :color, '53d8d9'
+      %span{ :class => 'glyphicon glyphicon-tint', :style => 'color:#00fdff;font-size:20px;'}
+    %div{ :class => 'col-md-2'}
+      = f.radio_button :color, '3dd452'
+      %span{ :class => 'glyphicon glyphicon-tint', :style => 'color:#00f900;font-size:20px;'}
+    %div{ :class => 'col-md-2'}
+      = f.radio_button :color, 'ff40ff'
+      %span{ :class => 'glyphicon glyphicon-tint', :style => 'color:#ff40ff;font-size:20px;'}
+    %div{ :class => 'col-md-2'}
+      = f.radio_button :color, 'ff9300'
+      %span{ :class => 'glyphicon glyphicon-tint', :style => 'color:#ff9300;font-size:20px;'}
+  %hr
+  %div{ :class => 'row'}
+    %div{ :class => 'col-md-12'}
+      = f.submit 'Annoy me!', :class => 'btn btn-primary btn-lg pull-right'

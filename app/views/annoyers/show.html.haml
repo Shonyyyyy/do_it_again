@@ -1,0 +1,33 @@
+%h1= @annoyer.title
+%hr
+%div{ :class => 'row' }
+  %div{ :class => 'col-md-8 col-md-offset-2' }
+    %h3 Nodes and Posts
+    %div{ :class => 'panel panel-default' }
+      %div{ :class => 'panel-heading', :style => "background-color:##{@annoyer.color};color:#fff;opacity:0.6;" } Nodes
+      %div{ :class => 'panel-body' }
+        - if @annoyer.nodes.any?
+          = render @annoyer.nodes
+        - else
+          %i there are no nodes that could help you
+%div{ :class => 'row'}
+  %div{ :class => 'col-md-8 col-md-offset-2' }
+    = render :partial => 'nodes/form'
+%hr
+%div{ :class => 'row'}
+  %div{ :class => 'col-md-8 col-md-offset-2' }
+    %h3 Your reminders:
+    %div{ :class => 'list-group' }
+      - if @annoyer.reminders.any?
+        = render @annoyer.reminders
+      - else
+        %i you haven't created any reminders yet
+%div{ :class => 'row' }
+  %div{ :class => 'col-md-8 col-md-offset-2' }
+    = render :partial => 'reminders/form'
+%hr
+= link_to edit_annoyer_path(@annoyer) do
+  %div{ :class => 'clearfix' }
+    %span{ :class => 'pull-right' }
+      Edit this annoyer
+    %span{ :class => 'pull-right glyphicon glyphicon-cog', :style => "font-size:20px;" }

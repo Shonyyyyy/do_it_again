@@ -1,0 +1,25 @@
+%p
+  Add a new node!
+  - node = @node || Node.new
+  = form_for node do |f|
+    - if node.errors.any?
+      %div{ :class => "alert alert-danger" }
+        %strong There has been an error:
+        = node.errors.full_messages.first
+    %p
+      %div{ :class => 'row'}
+        %div{ :class => 'col-md-12'}
+          %div{ :class => 'input-group' }
+            %span{ :class => 'input-group-addon' }
+              %span{ :class => 'glyphicon glyphicon-font' }
+            = f.text_field :title, :class => 'form-control', :placeholder => 'title'
+    %p
+      %div{ :class => 'row'}
+        %div{ :class => 'col-md-12'}
+          %div{ :class => 'input-group' }
+            %span{ :class => 'input-group-addon' }
+              %span{ :class => 'glyphicon glyphicon-console' }
+            = f.text_field :content, :class => 'form-control form-group-lg', :placeholder => 'content'
+    %p
+      = f.hidden_field :annoyer_id, :value => @annoyer.id
+      = f.submit 'write node!', :class => 'btn btn-primary btn pull-right'
