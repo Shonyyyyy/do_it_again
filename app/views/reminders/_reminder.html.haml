@@ -1,6 +1,6 @@
 %div{ :class => 'list-group-item' }
   %h4= "#{reminder.title}"
-  %span{ :class => 'label label-frequency-repeat', :style => "background-color:##{@annoyer.color};" }
+  %span{ :class => 'label label-annoyer-opacity', :style => "background-color:##{@annoyer.color};" }
     %i
       %strong= "#{format_frequency reminder.frequency}"
       %span a
@@ -9,7 +9,7 @@
   %div
     - if reminder.recents.any?
       You did that the last time on
-      %span{ :class => 'label label-frequency-repeat', :style => "background-color:##{@annoyer.color};" }
+      %span{ :class => 'label label-annoyer-opacity', :style => "background-color:##{@annoyer.color};" }
         = get_latest_date reminder
     - else
       = "You never did that!"

@@ -6,5 +6,12 @@
     - @annoyers.each do |annoyer|
       %p
         %div{ :class => 'clearfix' }
-          %div{ :class => 'list-group-item', :style => "background-color:##{annoyer.color};opacity: 0.6;" }
+          %div{ :class => 'list-group-item', :style => "background-color:##{annoyer.color};opacity: 0.6;color:#fff" }
             %h4{ :class => 'list-groip-item-headin', :style => "color:#fff;" }= annoyer.title
+            %span{ :class => 'label label-annoyer label-primary' }
+              %i
+                = "Nodes (#{get_amount_of_nodes annoyer})"
+            %span{ :class => 'label label-annoyer label-primary' }
+              %i
+                - latest_recent_data = get_latest_recent annoyer
+                = "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:recent]})"
