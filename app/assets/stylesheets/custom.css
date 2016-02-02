@@ -34,3 +34,17 @@ body p {
   font-size: 14px;
   margin-right: 3px;
 }
+
+.annoyers-overview {
+  padding: 20px;
+  margin: auto 0px 20px auto;
+  border: 1px solid #eee;
+  border-left-width: 8px;
+  border-radius: 3px;
+}
+
+.list-group-item-recent {
+  opacity: 0.6;
+  color: #fff;
+  margin: auto 0px 20px auto;
+}
