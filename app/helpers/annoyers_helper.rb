@@ -5,24 +5,16 @@ module AnnoyersHelper
   end
 
   def get_latest_recent annoyer
-    reminders = Reminder.where annoyer_id: annoyer.id
-    latest_recent = Date.new
-    latest_reminder = reminders.last
+    reminder_ids = Reminder.select(:id).where annoyer_id: annoyer.id
+    recent = Recent.where(reminder_id: reminder_ids).last
+    latest_reminder = Reminder.where(id: recent.reminder_id).first
 
-    reminders.each do |reminder|
-      recent_tmp = reminder.recents.order("created_at").last
-      if latest_recent < recent_tmp.created_at
-        latest_recent = recent_tmp.created_at
-        latest_reminder = reminder
-      end
-    end
-
-    {date: latest_recent.to_formatted_s(:long_ordinal), recent: latest_reminder.title}
+    {date: recent.created_at.to_formatted_s(:long_ordinal), reminder: latest_reminder.title}
   end
 
   def get_overall_latest_recents annoyers
-    all_reminders = Reminder.where annoyer_id: annoyers.map(&:id)
-    all_recents = Recent.where reminder_id: all_reminders.map(&:id)
+    reminder_ids = Reminder.select(:id).where(annoyer_id: annoyers.map(&:id))
+    all_recents = Recent.where reminder_id: reminder_ids
     recents = all_recents.order("created_at desc").limit("10")
 
     recent_reminder_arr = Array.new
