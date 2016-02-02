@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: "This is the Title"
   frequency: 1
-  repeat: MyString
-  annoyer_id: 
+  repeat: "week"
+  annoyer_id:
 
 two:
-  title: MyString
-  frequency: 1
-  repeat: MyString
-  annoyer_id: 
+  title: "This is another the Title"
+  frequency: 3
+  repeat: "Month"
+  annoyer_id:
