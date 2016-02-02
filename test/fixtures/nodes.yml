@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  content: MyText
-  annoyer_id: 
+  title: "This is the prefilled Title"
+  content: "This is the prefilled Content"
+  annoyer_id:
 
 two:
-  title: MyString
-  content: MyText
-  annoyer_id: 
+  title: "This is the second prefilled Title"
+  content: "This is the second prefilled Content"
+  annoyer_id:
