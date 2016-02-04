@@ -1,0 +1,30 @@
+- flash.each do |key, value|
+  %div{ :class => "alert alert-#{key}"}
+    = value
+%h1 Welcome to "DoItAgain"
+%p
+  DoItAgain strives to manage your routine tasks and everyday proceedures.
+  You ever felt like: "When did I water the flowers the last time?" or "when was
+  the last time i took my Pills to survive the week or don't get pregnant?".
+  DoItAgain sets an end to this torture.
+
+%h2
+  Get startet
+- if @current_user
+  %p
+    Welcome,
+    %strong= @current_user.email
+- else
+  %p
+    %strong Sign up
+    to get started!
+  %p
+    = link_to new_user_path, class: 'btn btn-primary btn-lg' do
+      Sign Up &raquo;
+  %p
+    Already Signed up? Why not
+    %strong Sign in
+    then?
+  %p
+    = link_to sign_in_path, class: 'btn btn-primary btn-lg' do
+      Sign In &raquo;

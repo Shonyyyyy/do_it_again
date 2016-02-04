@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Template language
 gem 'haml'
+# Authlogic, for user Authentication
+gem 'authlogic', '3.4.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use mysql as the database for Active Record

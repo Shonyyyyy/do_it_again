@@ -1,0 +1,18 @@
+- if @current_user
+  %ul{ :class => "nav nav-pills" }
+    %li{ :role => "presentation" }
+      = link_to "Home", root_path
+    %li{ :role => "presentation" }
+      = link_to 'Your Dashboard', annoyers_path
+    %li{ :role => "presentation" }
+      = link_to 'Add a new Annoyer', new_annoyer_path
+    %li{ :role => "presentation", :class => 'pull-right' }
+      = link_to 'Log out', sign_out_path, method: :delete
+- else
+  %ul{ :class => "nav nav-pills" }
+    %li{ :role => "presentation" }
+      = link_to "Home", root_path
+    %li{ :role => "presentation" }
+      = link_to 'Sign Up', new_user_path
+    %li{ :role => "presentation", :class => 'pull-right' }
+      = link_to 'Sign in', sign_in_path
