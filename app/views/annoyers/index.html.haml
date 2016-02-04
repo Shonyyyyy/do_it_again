@@ -7,12 +7,10 @@
       %div{ :class => 'annoyers-overview', :style => "border-left-color:##{annoyer.color};" }
         %h4{ :class => 'list-group-item-heading' }= annoyer.title
         %div{ :class => 'label-annoyer' }
-          %i
-            = "Nodes (#{get_amount_of_nodes annoyer})"
+          = "Nodes (#{get_amount_of_nodes annoyer})"
         %div{ :class => 'label-annoyer' }
-          %i
-            - latest_recent_data = get_latest_recent annoyer
-            = "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
+          - latest_recent_data = get_latest_recent annoyer
+          = "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
         %div{ :class => 'clearfix' }
           = link_to "Manage", annoyer_path(annoyer), :class => "btn btn-primary btn-sm pull-right"
   %div{ :class => "col-md-6" }

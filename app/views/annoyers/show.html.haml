@@ -26,8 +26,12 @@
   %div{ :class => 'col-md-8 col-md-offset-2' }
     = render :partial => 'reminders/form'
 %hr
+= link_to annoyer_path(@annoyer), method: :delete, data: { confirm: 'Are you sure?' } do
+  %span{ :class => 'btn btn-danger btn-sm pull-right', :style => "margin-bottom:20px;"}
+    Delete this annoyer
+    %span{ :class => 'pull-right glyphicon glyphicon-trash', :style => "font-size:16px;margin-left:5px;" }
 = link_to edit_annoyer_path(@annoyer) do
   %div{ :class => 'clearfix' }
-    %span{ :class => 'pull-right' }
+    %span{ :class => 'btn btn-primary btn-sm pull-right', :style => "margin-bottom:20px;" }
       Edit this annoyer
-    %span{ :class => 'pull-right glyphicon glyphicon-cog', :style => "font-size:20px;" }
+      %span{ :class => 'pull-right glyphicon glyphicon-cog', :style => "font-size:16px;margin-left:5px;" }
