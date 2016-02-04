@@ -32,35 +32,35 @@ class AnnoyerTest < ActiveSupport::TestCase
   end
 
   test "Model should be updated." do
-    annoyer_fixtures = Annoyer.find annoyers(:one)
-    assert annoyer_fixtures.update(title: "Hello World", color: "ffffff")
+    annoyer = Annoyer.find(annoyers(:one).id)
+    assert annoyer.update(title: "Hello World", color: "ffffff")
 
-    assert_equal Annoyer.find(annoyers(:one)).title, "Hello World", "Title should be updated Title."
-    assert_equal Annoyer.find(annoyers(:one)).color, "ffffff", "Color should be updated Color."
+    assert_equal annoyer.title, "Hello World", "Title should be updated Title."
+    assert_equal annoyer.color, "ffffff", "Color should be updated Color."
 
-    assert_not_equal Annoyer.find(annoyers(:one)).title, "MyString", "Old vaule, should not be true."
-    assert_not_equal Annoyer.find(annoyers(:one)).color, "000000", "Old Value, should not be true."
+    assert_not_equal annoyer.title, "MyString", "Old vaule, should not be true."
+    assert_not_equal annoyer.color, "000000", "Old Value, should not be true."
   end
 
   test "Model shouldn't be updated, title too short." do
-    annoyer_fixtures = Annoyer.find(annoyers(:one))
+    annoyer_fixtures = Annoyer.find(annoyers(:one).id)
     assert !annoyer_fixtures.update(title: "Hell", color: "ffffff"), "Not updated, since title is too short."
 
-    assert_not_equal Annoyer.find(annoyers(:one)).title, "Hell", "Title should not be updated since title is too short."
-    assert_not_equal Annoyer.find(annoyers(:one)).color, "ffffff", "Color should not be updated since model wasn't updated."
+    assert_not_equal Annoyer.find(annoyers(:one).id).title, "Hell", "Title should not be updated since title is too short."
+    assert_not_equal Annoyer.find(annoyers(:one).id).color, "ffffff", "Color should not be updated since model wasn't updated."
 
-    assert_equal Annoyer.find(annoyers(:one)).title, "MyString", "Old value, from not updated Model."
-    assert_equal Annoyer.find(annoyers(:one)).color, "000000", "Old value, from not updated Model."
+    assert_equal Annoyer.find(annoyers(:one).id).title, "MyString", "Old value, from not updated Model."
+    assert_equal Annoyer.find(annoyers(:one).id).color, "000000", "Old value, from not updated Model."
   end
 
   test "Model shouldn't be updated, color too short." do
-    annoyer_fixtures = Annoyer.find annoyers(:one)
+    annoyer_fixtures = Annoyer.find annoyers(:one).id
     assert !annoyer_fixtures.update(title: "Hello Test", color: "fff"), "Not updated, since title is too short."
 
-    assert_not_equal Annoyer.find(annoyers(:one)).title, "Hello Test", "title should not be updated since model wasn't updated."
-    assert_not_equal Annoyer.find(annoyers(:one)).color, "fff", "Color should not be updated since color is too short."
+    assert_not_equal Annoyer.find(annoyers(:one).id).title, "Hello Test", "title should not be updated since model wasn't updated."
+    assert_not_equal Annoyer.find(annoyers(:one).id).color, "fff", "Color should not be updated since color is too short."
 
-    assert_equal Annoyer.find(annoyers(:one)).title, "MyString", "Old value, from not updated Model."
-    assert_equal Annoyer.find(annoyers(:one)).color, "000000", "Old value, from not updated Model."
+    assert_equal Annoyer.find(annoyers(:one).id).title, "MyString", "Old value, from not updated Model."
+    assert_equal Annoyer.find(annoyers(:one).id).color, "000000", "Old value, from not updated Model."
   end
 end
