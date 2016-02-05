@@ -1,6 +1,7 @@
 - flash.each do |key, value|
-  %div{ :class => "alert alert-#{key}"}
-    = value
+  %p
+    %div{ :class => "alert alert-#{key}"}
+      = value
 %h1 Welcome to "DoItAgain"
 %p
   DoItAgain strives to manage your routine tasks and everyday proceedures.
@@ -10,10 +11,15 @@
 
 %h2
   Get startet
-- if @current_user
+- if current_user
   %p
     Welcome,
-    %strong= @current_user.email
+    %strong= current_user.email
+    %p
+      = link_to annoyers_path, class: 'btn btn-primary btn-lg' do
+        Your Dashboard &raquo;
+      = link_to new_annoyer_path, class: 'btn btn-primary btn-lg' do
+        Add a new Annoyer &raquo;
 - else
   %p
     %strong Sign up

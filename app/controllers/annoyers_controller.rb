@@ -1,38 +1,61 @@
 class AnnoyersController < ApplicationController
   def index
-    @annoyers = Annoyer.all
+    if current_user
+      @annoyers = Annoyer.all
+    else
+      redirect_to root_path
+    end
   end
 
   def new
-    @annoyer = Annoyer.new
+    if current_user
+      @annoyer = Annoyer.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
-    @annoyer = Annoyer.new annoyer_params
-    if @annoyer.save
-      redirect_to @annoyer
+    if current_user
+      @annoyer = Annoyer.new annoyer_params
+      if @annoyer.save
+        redirect_to @annoyer
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      redirect_to root_path
     end
   end
 
   def show
-    @annoyer = Annoyer.find params[:id]
-    @node = Node.new
-    @reminder = Reminder.new
+    if current_user
+      @annoyer = Annoyer.find params[:id]
+      @node = Node.new
+      @reminder = Reminder.new
+    else
+      redirect_to root_path
+    end
   end
 
   def edit
-    @annoyer = Annoyer.find params[:id]
+    if current_user
+      @annoyer = Annoyer.find params[:id]
+    else
+      redirect_to root_path
+    end
   end
 
   def update
-    @annoyer = Annoyer.find params[:id]
-
-    if @annoyer.update annoyer_params
-      redirect_to @annoyer
+    if current_user
+      @annoyer = Annoyer.find params[:id]
+      if @annoyer.update annoyer_params
+        redirect_to @annoyer
+      else
+        redirect_to edit_annoyer_path(@annoyer)
+      end
     else
-      redirect_to edit_annoyer_path(@annoyer)
+      redirect_to root_path
     end
   end
 
@@ -40,5 +63,4 @@ class AnnoyersController < ApplicationController
     def annoyer_params
       params.require(:annoyer).permit(:title, :color)
     end
-
 end
