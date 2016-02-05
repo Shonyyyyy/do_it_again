@@ -49,7 +49,6 @@ class AnnoyersController < ApplicationController
 
   def destroy
     validate_user params[:id] do |annoyer|
-      annoyer = annoyer
       annoyer.destroy
       redirect_to annoyers_path
     end
