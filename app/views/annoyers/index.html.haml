@@ -9,8 +9,11 @@
         %div{ :class => 'label-annoyer' }
           = "Nodes (#{get_amount_of_nodes annoyer})"
         %div{ :class => 'label-annoyer' }
-          - latest_recent_data = get_latest_recent annoyer
-          = "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
+          = if annoyer.reminders.any?
+            - latest_recent_data = get_latest_recent annoyer
+            - "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
+          - else
+            - "You never did that!"
         %div{ :class => 'clearfix' }
           = link_to "Manage", annoyer_path(annoyer), :class => "btn btn-primary btn-sm pull-right"
   %div{ :class => "col-md-6" }
