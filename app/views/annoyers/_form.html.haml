@@ -1,8 +1,5 @@
 = form_for @annoyer do |f|
-  - if @annoyer.errors.any?
-    .alert.alert-danger
-      %strong There has been an error:
-      = @annoyer.errors.full_messages.first
+  = render 'shared/error', object: @annoyer
   %hr
   %p just enter an Annoyer name, to annoy you:
   %p

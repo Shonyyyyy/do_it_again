@@ -1,8 +1,5 @@
 %h1 Sign In
-- if @user_session.errors.any?
-  .alert.alert-danger
-    %strong There has been an error:
-    = @user_session.errors.full_messages.first
+= render 'shared/error', object: @user_session
 %p
   Check in with your userdata
   %hr

@@ -1,8 +1,5 @@
 %h1 Create a new useraccount
-- if @user.errors.any?
-  .alert.alert-danger
-    %strong There has been an error:
-    = @user.errors.full_messages.first
+= render 'shared/error', object: @user
 %p
   Fill out this form, and go!
   %hr

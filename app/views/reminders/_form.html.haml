@@ -2,10 +2,7 @@
   Add a new Reminder!
   - reminder = @reminder || Reminder.new
   = form_for reminder do |f|
-    - if reminder.errors.any?
-      .alert.alert-danger
-        %strong There has been an error:
-        = reminder.errors.full_messages.first
+    = render 'shared/error', object: reminder
     %p
       .row
         .col-md-12

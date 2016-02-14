@@ -2,10 +2,7 @@
   Add a new node!
   - node = @node || Node.new
   = form_for node do |f|
-    - if node.errors.any?
-      .alert.alert-danger
-        %strong There has been an error:
-        = node.errors.full_messages.first
+    = render 'shared/error', object: node
     %p
       .row
         .col-md-12
