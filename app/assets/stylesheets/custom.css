@@ -1,3 +1,11 @@
+body {
+  background: url(bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body p {
   font-size: 18px;
 }
@@ -47,6 +55,7 @@ body p {
   border: 1px solid #eee;
   border-left-width: 8px;
   border-radius: 3px;
+  background-color: #fff;
 }
 
 .list-group-item-recent {
@@ -57,4 +66,9 @@ body p {
 
 .close span {
   font-size:16px;
+}
+
+.container-bg {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
 }

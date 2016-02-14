@@ -7,10 +7,12 @@
     = csrf_meta_tags
   %body
     .container
-      = render 'layouts/navigation'
+      .container-bg
+        = render 'layouts/navigation'
     %div{ :id => 'header' }
       .container
         %h1 DoItAgain
         %p manage your annoyers, but let them just help you
     .container
-      = yield
+      .container-bg
+        = yield
