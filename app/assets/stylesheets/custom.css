@@ -54,3 +54,7 @@ body p {
   color: #fff;
   margin: auto 0px 20px auto;
 }
+
+.close span {
+  font-size:16px;
+}
