@@ -3,27 +3,27 @@
   - reminder = @reminder || Reminder.new
   = form_for reminder do |f|
     - if reminder.errors.any?
-      %div{ :class => "alert alert-danger" }
+      .alert.alert-danger
         %strong There has been an error:
         = reminder.errors.full_messages.first
     %p
-      %div{ :class => 'row'}
-        %div{ :class => 'col-md-12'}
-          %div{ :class => 'input-group' }
-            %span{ :class => 'input-group-addon' }
-              %span{ :class => 'glyphicon glyphicon-font' }
+      .row
+        .col-md-12
+          .input-group
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-font
             = f.text_field :title, :class => 'form-control', :placeholder => 'title'
     %p
-      %div{ :class => 'row'}
-        %div{ :class => 'col-md-6'}
+      .row
+        .col-md-6
           %span how often:
-          %div{ :class => 'input-group' }
-            %span{ :class => 'input-group-addon' }
-              %span{ :class => 'glyphicon glyphicon-scale' }
+          .input-group
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-scale
             = f.number_field :frequency, :class => 'form-control', :min => '1', :value => '1'
-        %div{ :class => 'col-md-6'}
+        .col-md-6
           %span ...times each:
-          %div{ :class => 'form-group' }
+          .form-group
             = f.select :repeat, ['Day', 'Week', 'Month', 'Year'], {}, :class => 'form-control'
     %p
       = f.hidden_field :annoyer_id, :value => @annoyer.id

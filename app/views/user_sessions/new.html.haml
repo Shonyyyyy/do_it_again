@@ -1,26 +1,26 @@
 %h1 Sign In
 - if @user_session.errors.any?
-  %div{ :class => "alert alert-danger" }
+  .alert.alert-danger
     %strong There has been an error:
     = @user_session.errors.full_messages.first
 %p
   Check in with your userdata
   %hr
-  %div{ :class => 'col-md-6 col-md-offset-3' }
+  .col-md-6.col-md-offset-3
     = form_for @user_session do |f|
       %p
-        %div{ :class => 'input-group'}
-          %span{ :class => 'input-group-addon' }
+        .input-group
+          %span.input-group-addon
             %span{ :style => 'font-weight:bold;' } @
           =f.email_field :email, class: 'form-control', :placeholder => 'eMail'
-        %div{ :class => 'input-group'}
-          %span{ :class => 'input-group-addon' }
-            %span{ :class => 'glyphicon glyphicon-console' }
+        .input-group
+          .input-group-addon
+            .glyphicon.glyphicon-console
           =f.password_field :password, class: 'form-control', :placeholder => 'Password'
       %p
-        %div{ :class => 'form-group pull-right' }
+        .form-group.pull-right
           = f.label :remember_me
           = f.check_box :remember_me
       %p
-        %div{ :class => 'clearfix'}
+        .clearfix
         = f.submit 'Login!', :class => 'btn btn-primary btn pull-right'
