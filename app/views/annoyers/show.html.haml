@@ -1,37 +1,37 @@
 %h1= @annoyer.title
 %hr
-%div{ :class => 'row' }
-  %div{ :class => 'col-md-8 col-md-offset-2' }
+.row
+  .col-md-8.col-md-offset-2
     %h3 Nodes and Posts
-    %div{ :class => 'panel panel-default' }
-      %div{ :class => 'panel-heading', :style => "background-color:##{@annoyer.color};color:#fff;opacity:0.6;" } Nodes
-      %div{ :class => 'panel-body' }
+    .panel.panel-default
+      .panel-heading{ :style => "background-color:##{@annoyer.color};color:#fff;opacity:0.6;" } Nodes
+      .panel-body
         - if @annoyer.nodes.any?
           = render @annoyer.nodes
         - else
           %i there are no nodes that could help you
-%div{ :class => 'row'}
-  %div{ :class => 'col-md-8 col-md-offset-2' }
+.row
+  .col-md-8.col-md-offset-2
     = render :partial => 'nodes/form'
 %hr
-%div{ :class => 'row'}
-  %div{ :class => 'col-md-8 col-md-offset-2' }
+.row
+  .col-md-8.col-md-offset-2
     %h3 Your reminders:
-    %div{ :class => 'list-group' }
+    .list-group
       - if @annoyer.reminders.any?
         = render @annoyer.reminders
       - else
         %i you haven't created any reminders yet
-%div{ :class => 'row' }
-  %div{ :class => 'col-md-8 col-md-offset-2' }
+.row
+  .col-md-8.col-md-offset-2
     = render :partial => 'reminders/form'
 %hr
 = link_to annoyer_path(@annoyer), method: :delete, data: { confirm: 'Are you sure?' } do
-  %span{ :class => 'btn btn-danger btn-sm pull-right', :style => "margin-bottom:20px;"}
+  %span.btn.btn-danger.btn-sm.pull-right{ :style => "margin-bottom:20px;" }
     Delete this annoyer
-    %span{ :class => 'pull-right glyphicon glyphicon-trash', :style => "font-size:16px;margin-left:5px;" }
+    %span.pull-right.glyphicon.glyphicon-trash{ :style => "font-size:16px;margin-left:5px;" }
 = link_to edit_annoyer_path(@annoyer) do
-  %div{ :class => 'clearfix' }
-    %span{ :class => 'btn btn-primary btn-sm pull-right', :style => "margin-bottom:20px;" }
+  .clearfix
+    %span.btn.btn-primary.btn-sm.pull-right{ :style => "margin-bottom:20px;" }
       Edit this annoyer
-      %span{ :class => 'pull-right glyphicon glyphicon-cog', :style => "font-size:16px;margin-left:5px;" }
+      %span.pull-right.glyphicon.glyphicon-cog{ :style => "font-size:16px;margin-left:5px;" }

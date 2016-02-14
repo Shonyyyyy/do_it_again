@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title= DoItAgain
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .container
+      = render 'layouts/navigation'
+    %div{ :id => 'header' }
+      .container
+        %h1 DoItAgain
+        %p manage your annoyers, but let them just help you
+    .container
+      = yield

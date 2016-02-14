@@ -1,25 +1,25 @@
 %h2 Annoyer Overview and Dashboard
 %hr
-%div{ :class => "row" }
-  %div{ :class => "col-md-6"}
+.row
+  .col-md-6
     %h3 Your Annoyers:
     - @annoyers.each do |annoyer|
-      %div{ :class => 'annoyers-overview', :style => "border-left-color:##{annoyer.color};" }
-        %h4{ :class => 'list-group-item-heading' }= annoyer.title
-        %div{ :class => 'label-annoyer' }
+      .annoyers-overview{ :style => "border-left-color:##{annoyer.color};" }
+        %h4.list-group-item-heading= annoyer.title
+        .label-annoyer
           = "Nodes (#{get_amount_of_nodes annoyer})"
-        %div{ :class => 'label-annoyer' }
+        .label-annoyer
           = if annoyer.reminders.any?
             - latest_recent_data = get_latest_recent annoyer
             - "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
           - else
             - "You never did that!"
-        %div{ :class => 'clearfix' }
+        .clearfix
           = link_to "Manage", annoyer_path(annoyer), :class => "btn btn-primary btn-sm pull-right"
-  %div{ :class => "col-md-6" }
+  .col-md-6
     %h3 Your 10 latest Recents:
     %ul
       - get_overall_latest_recents(@annoyers).each do |recent|
-        %li{ :class => "list-group-item list-group-item-recent", :style => "background-color:##{recent[:color]}"}
+        %li.list-group-item.list-group-item-recent{ :style => "background-color:##{recent[:color]}" }
           %strong= "#{recent[:reminder]} on "
           %i= recent[:date]
