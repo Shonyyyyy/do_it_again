@@ -7,4 +7,8 @@ class Reminder < ActiveRecord::Base
   validates :frequency, presence: true, length: { minimum: 1 }, :numericality => { :greater_than => 0}
   validates :repeat, presence: true, inclusion: { in: repeat_values.keys}
   validates :annoyer_id, presence: true
+
+  def latest_recent
+    recents.last
+  end
 end

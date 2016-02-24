@@ -10,7 +10,7 @@
           = "Nodes (#{get_amount_of_nodes annoyer})"
         .label-annoyer
           = if annoyer.reminders.any?
-            - latest_recent_data = get_latest_recent annoyer
+            - latest_recent_data = latest_recent_data annoyer
             - "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
           - else
             - "You never did that!"
