@@ -10,11 +10,7 @@ module AnnoyersHelper
   end
 
   def get_overall_latest_recents annoyers
-    reminder_ids = Reminder.select(:id).where(annoyer_id: annoyers.map(&:id))
-    all_recents = Recent.where reminder_id: reminder_ids
-    recents = all_recents.order("created_at desc").limit("10")
-
-    map_recent_reminder_data recents
+    map_recent_reminder_data(Annoyer.all_recents current_user.id)
   end
 
   private
