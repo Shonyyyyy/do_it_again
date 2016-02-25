@@ -12,7 +12,7 @@ class Annoyer < ActiveRecord::Base
   def self.all_recents user_id
     annoyers = Annoyer.where(user_id: user_id)
     reminder_ids = Reminder.select(:id).where(annoyer_id: annoyers.map(&:id))
-    all_recents = Recent.where reminder_id: reminder_ids
+    all_recents = Recent.where(reminder_id: reminder_ids)
     all_recents.order("created_at desc").limit("10")
   end
 end
