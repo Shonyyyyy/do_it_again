@@ -11,9 +11,12 @@
         .label-annoyer
           = if annoyer.reminders.any?
             - latest_recent_data = latest_recent_data annoyer
-            - "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
+            - if latest_recent_data
+              - "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
+            - else
+              - "You never did that!"
           - else
-            - "You never did that!"
+            - "There are no reminders yet!"
         .clearfix
           = link_to "Manage", annoyer_path(annoyer), :class => "btn btn-primary btn-sm pull-right"
   .col-md-6

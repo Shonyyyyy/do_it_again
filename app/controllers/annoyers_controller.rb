@@ -11,7 +11,6 @@ class AnnoyersController < ApplicationController
   end
 
   def create
-    debugger
     @annoyer = Annoyer.new annoyer_params
     if @annoyer.save
       redirect_to @annoyer

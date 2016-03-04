@@ -6,7 +6,11 @@ module AnnoyersHelper
 
   def latest_recent_data annoyer
     latest_reminder = annoyer.latest_reminder
-    {date: latest_reminder.latest_recent.created_at.to_formatted_s(:long_ordinal), reminder: latest_reminder.title}
+    if latest_reminder
+      {date: latest_reminder.latest_recent.created_at.to_formatted_s(:long_ordinal), reminder: latest_reminder.title}
+    else
+      nil
+    end
   end
 
   def get_overall_latest_recents annoyers

@@ -6,7 +6,9 @@ class Annoyer < ActiveRecord::Base
 
   def latest_reminder
     recent = Recent.where(reminder_id: reminders.select(:id)).last
-    Reminder.where(id: recent.reminder_id).first
+    if recent
+      Reminder.where(id: recent.reminder_id).first
+    end
   end
 
   def self.all_recents user_id
