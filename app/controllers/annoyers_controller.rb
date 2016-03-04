@@ -1,57 +1,48 @@
 class AnnoyersController < ApplicationController
+  before_action :validate_user, only: [:show, :edit, :update, :destroy]
+  before_action :valid_session, only: [:new, :index, :create]
+
   def index
-    valid_session do
-      @annoyers = Annoyer.where(user_id: current_user.id)
-    end
+    @annoyers = Annoyer.where(user_id: current_user.id)
   end
 
   def new
-    valid_session do
-      @annoyer = Annoyer.new
-    end
+    @annoyer = Annoyer.new
   end
 
   def create
-    valid_session do
-      @annoyer = Annoyer.new annoyer_params
-      if @annoyer.save
-        redirect_to @annoyer
-      else
-        render 'new'
-      end
+    debugger
+    @annoyer = Annoyer.new annoyer_params
+    if @annoyer.save
+      redirect_to @annoyer
+    else
+      render 'new'
     end
   end
 
   def show
-    validate_user params[:id] do |annoyer|
-      @annoyer = annoyer
-      @node = Node.new
-      @reminder = Reminder.new
-    end
+    @annoyer = Annoyer.find(params[:id])
+    @node = Node.new
+    @reminder = Reminder.new
   end
 
   def edit
-    validate_user params[:id] do |annoyer|
-      @annoyer = annoyer
-    end
+    @annoyer = Annoyer.find(params[:id])
   end
 
   def update
-    validate_user params[:id] do |annoyer|
-      @annoyer = annoyer
-      if @annoyer.update annoyer_params
-        redirect_to @annoyer
-      else
-        redirect_to edit_annoyer_path(@annoyer)
-      end
+    @annoyer = Annoyer.find(params[:id])
+    if @annoyer.update annoyer_params
+      redirect_to @annoyer
+    else
+      redirect_to edit_annoyer_path(@annoyer)
     end
   end
 
   def destroy
-    validate_user params[:id] do |annoyer|
-      annoyer.destroy
-      redirect_to annoyers_path
-    end
+    annoyer = Annoyer.find(params[:id])
+    annoyer.destroy
+    redirect_to annoyers_path
   end
 
   private
@@ -59,19 +50,15 @@ class AnnoyersController < ApplicationController
       params.require(:annoyer).permit(:title, :color, :user_id)
     end
 
-    def validate_user annoyer_id
-      annoyer = Annoyer.find(annoyer_id)
-      if current_user.id == annoyer.user_id
-        yield annoyer
-      else
+    def validate_user
+      annoyer = Annoyer.find(params[:id])
+      if current_user.id != annoyer.user_id
         redirect_to root_path
       end
     end
 
     def valid_session
-      if current_user
-        yield
-      else
+      if !current_user
         redirect_to root_path
       end
     end
