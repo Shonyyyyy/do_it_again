@@ -27,6 +27,7 @@ class AnnoyersController < ApplicationController
     @annoyer = Annoyer.find(params[:id])
     @node = Node.new
     @reminder = Reminder.new
+    @reminder_data = show_reminder_data(@annoyer)
   end
 
   def edit
