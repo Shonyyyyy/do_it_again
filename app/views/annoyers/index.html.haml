@@ -3,26 +3,22 @@
 .row
   .col-md-6
     %h3 Your Annoyers:
-    - @annoyers.each do |annoyer|
-      .annoyers-overview{ :style => "border-left-color:##{annoyer.color};" }
-        %h4.list-group-item-heading= annoyer.title
+    - @annoyers_data.each do |annoyer_data|
+      .annoyers-overview{ :style => "border-left-color:##{annoyer_data[:annoyer].color};" }
+        %h4.list-group-item-heading= annoyer_data[:annoyer].title
         .label-annoyer
-          = "Nodes (#{get_amount_of_nodes annoyer})"
+          = "Nodes (#{annoyer_data[:node_count]})"
         .label-annoyer
-          = if annoyer.reminders.any?
-            - latest_recent_data = latest_recent_data annoyer
-            - if latest_recent_data
-              - "latest Recent on: #{latest_recent_data[:date]} (#{latest_recent_data[:reminder]})"
-            - else
-              - "You never did that!"
+          - if annoyer_data[:date]
+            = "latest recent: #{annoyer_data[:date]} (#{annoyer_data[:reminder]})"
           - else
-            - "There are no reminders yet!"
+            = "You never did that..."
         .clearfix
-          = link_to "Manage", annoyer_path(annoyer), :class => "btn btn-primary btn-sm pull-right"
+          = link_to "Manage", annoyer_path(annoyer_data[:annoyer]), :class => "btn btn-primary btn-sm pull-right"
   .col-md-6
     %h3 Your 10 latest Recents:
     %ul
-      - get_overall_latest_recents(@annoyers).each do |recent|
+      - @latest_recents.each do |recent|
         %li.list-group-item.list-group-item-recent{ :style => "background-color:##{recent[:color]}" }
           %strong= "#{recent[:reminder]} on "
           %i= recent[:date]

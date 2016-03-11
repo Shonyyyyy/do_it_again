@@ -5,7 +5,8 @@ class Annoyer < ActiveRecord::Base
   validates :color, presence: true, length: { minimum: 6 }
 
   def latest_reminder
-    recent = Recent.where(reminder_id: reminders.select(:id)).last
+    recents = Recent.where(reminder_id: reminders.select(:id))
+    recent = recents.order('created_at ASC').last
     if recent
       Reminder.where(id: recent.reminder_id).first
     end

@@ -3,7 +3,12 @@ class AnnoyersController < ApplicationController
   before_action :valid_session, only: [:new, :index, :create]
 
   def index
-    @annoyers = Annoyer.where(user_id: current_user.id)
+    annoyers = Annoyer.where(user_id: current_user.id)
+    @annoyers_data = []
+    annoyers.each do |annoyer|
+      @annoyers_data.push(annoyer_index_data(annoyer))
+    end
+    @latest_recents = overall_recents_index_data annoyers
   end
 
   def new
@@ -42,6 +47,40 @@ class AnnoyersController < ApplicationController
     annoyer = Annoyer.find(params[:id])
     annoyer.destroy
     redirect_to annoyers_path
+  end
+
+  def annoyer_index_data annoyer
+    latest_reminder = annoyer.latest_reminder
+    nodes = Node.where annoyer_id: annoyer.id
+
+    if latest_reminder
+      {
+        annoyer: annoyer,
+        date: latest_reminder.latest_recent.created_at.to_formatted_s(:long_ordinal),
+        reminder: latest_reminder.title,
+        node_count: nodes.count
+      }
+    else
+      {
+        annoyer: annoyer,
+        date: nil,
+        node_count: nodes.count
+      }
+    end
+  end
+
+  def overall_recents_index_data annoyers
+    recents = Annoyer.all_recents current_user.id
+    recents_data = []
+    recents.each do |recent|
+      reminder = Reminder.where(id: recent.reminder_id).first
+      recents_data.push({
+          date: recent.created_at.to_formatted_s(:long_ordinal),
+          reminder: reminder.title,
+          color: Annoyer.where(id: reminder.annoyer_id).first.color
+      })
+    end
+    return recents_data
   end
 
   private
