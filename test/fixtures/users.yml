@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
+  email: jonas.moeller@web.de
+  crypted_password: e896de6ea5e0144c86ba0bafa5b36c84a3293bef053f7fa9d93169af0dd0e9f80cc917b374f8e626c1546f51bebec18c74757069a6e9bde4ba9188448bfe3aae
+  password_salt: kGbESbKQZP47WFuDvTI4
+  persistence_token: 980a9cfda0f308ec1ebe5f7e75f7a45d824cadc21d389f0587a7eacedbbf7ae24bcea5dd7aa90137b122bf1be1b0178cb41c75a969b9c41f9fbe60dac4cfd9aa
 
 two:
-  email: MyString
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
+  email: myfanstaff@web.de
+  crypted_password: 3f8374113ed9ec94202b08fe719cee40557069ea76c9a1d8dc76afe8c7ebdb76a5285d7d337c39f006bc8c6308db3ee2b32c4dd4c0bddc7ffa85e09388d502b8
+  password_salt: sqe1JUAjNKw8UazqZEo
+  persistence_token: ba7a7df70e8f3d34d23b7addf7bcdd5d68e83260a1d0ee356aec0e87bf66f8a0f7763e378152bc5ba4978a710d752b293db34e338f3b89a27b586fa7cf95ae4a

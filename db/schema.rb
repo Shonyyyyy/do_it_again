@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204142207) do
+ActiveRecord::Schema.define(version: 20160205111016) do
 
   create_table "annoyers", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "color",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "annoyers", ["user_id"], name: "index_annoyers_on_user_id", using: :btree
 
   create_table "nodes", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -60,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160204142207) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "annoyers", "users"
   add_foreign_key "nodes", "annoyers"
   add_foreign_key "recents", "reminders"
   add_foreign_key "reminders", "annoyers"
