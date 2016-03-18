@@ -19,7 +19,7 @@
     %h3 Your reminders:
     .list-group
       - if @annoyer.reminders.any?
-        = render @annoyer.reminders
+        = render 'reminders/reminder', reminders: @reminder_data
       - else
         %i you haven't created any reminders yet
 .row

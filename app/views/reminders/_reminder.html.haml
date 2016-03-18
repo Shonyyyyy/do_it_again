@@ -1,25 +1,26 @@
-.list-group-item
-  %h4= @reminder_data[:reminder].title
-  %div{ :style => "margin:5px;" }
-    .label.label-annoyer-opacity{ :style => "background-color:##{@annoyer.color};" }
-      %i
-        %strong= format_frequency(@reminder_data[:reminder].frequency)
-        a
-        %strong= @reminder_data[:reminder].repeat
-  %div{ :style => "margin:5px;" }
-    You did it
-    .label.label-annoyer-opacity{ :style => "background-color:##{@annoyer.color};" }
-      %i
-        = frequency_rate_formatted(@reminder_data[:amount])
-    = "this #{@reminder_data[:reminder].repeat}"
-    = link_to '... and I did it right now!', new_reminder_recent_path(:reminder_id => @reminder_data[:reminder].id)
-  %div{ :style => "margin:5px;" }
-    - if @reminder_data[:reminder].recents.any?
-      You did that the last time on
-      %span.label.label-annoyer-opacity{ :style => "background-color:##{@annoyer.color};" }
-        = @reminder_data[:latest_recent_date]
-    - else
-      = "You never did that at all!"
-  = link_to @reminder_data[:reminder], method: :delete do
-    .clearfix
-      %span.pull-right.glyphicon.glyphicon-trash{ :style => "font-size:16px;" }
+- reminders.each do |reminder|
+  .list-group-item
+    %h4= reminder[:reminder].title
+    %div{ :style => "margin:5px;" }
+      .label.label-annoyer-opacity{ :style => "background-color:##{@annoyer.color};" }
+        %i
+          %strong= format_frequency(reminder[:reminder].frequency)
+          a
+          %strong= reminder[:reminder].repeat
+    %div{ :style => "margin:5px;" }
+      You did it
+      .label.label-annoyer-opacity{ :style => "background-color:##{@annoyer.color};" }
+        %i
+          = frequency_rate_formatted(reminder[:amount])
+      = "this #{reminder[:reminder].repeat}"
+      = link_to '... and I did it right now!', new_reminder_recent_path(:reminder_id => reminder[:reminder].id)
+    %div{ :style => "margin:5px;" }
+      - if reminder[:reminder].recents.any?
+        You did that the last time on
+        %span.label.label-annoyer-opacity{ :style => "background-color:##{@annoyer.color};" }
+          = reminder[:latest_recent_date]
+      - else
+        = "You never did that at all!"
+    = link_to reminder[:reminder], method: :delete do
+      .clearfix
+        %span.pull-right.glyphicon.glyphicon-trash{ :style => "font-size:16px;" }

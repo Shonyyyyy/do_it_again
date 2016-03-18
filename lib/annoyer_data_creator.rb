@@ -1,9 +1,7 @@
 module AnnoyerDataCreator
   def index_annoyer_data annoyers
     annoyers_data = []
-    annoyers.each do |annoyer|
-      annoyers_data.push(annoyer_data(annoyer))
-    end
+    annoyers.each { |annoyer| annoyers_data.push(annoyer_data(annoyer)) }
     return annoyers_data
   end
 
