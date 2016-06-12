@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 # Template language
 gem 'haml'
 # Authlogic, for user Authentication
@@ -40,6 +39,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Testing Framework
+  gem 'rspec-rails'
 end
 
 group :development do
