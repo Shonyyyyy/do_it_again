@@ -3,13 +3,8 @@ require 'rails_helper'
 
 describe Annoyer do
   before do
-    @user = User.new(
-      {
-        'email' => 'valid_user@example.com',
-        'password' => 'abc123',
-        'password_confirmation' => 'abc123'
-      }
-    )
+    @user = User.new({ 'email' => 'valid_user@example.com', 'password' => 'abc123', 'password_confirmation' => 'abc123' })
+    @user.save
   end
 
   let(:valid_credentials) { { 'user_id' => @user.id, 'title' => 'valid Annoyer', 'color' => 'ff9300' } }
