@@ -28,8 +28,8 @@ class AnnoyersOverview
       recents_data.push(recent_view_model_element(recent, reminder))
     end
     @recents = recents_data
-
   end
+
   def annoyer_view_model_element(annoyer)
     latest_reminder = annoyer.latest_reminder
     nodes = Node.where annoyer_id: annoyer.id

@@ -3,6 +3,7 @@ class Annoyer < ActiveRecord::Base
   has_many :reminders, dependent: :destroy
   validates :title, presence: true, length: { minimum: 5 }
   validates :color, presence: true, length: { minimum: 6 }
+  validates :user_id, presence: true
 
   def latest_reminder
     recents = Recent.where(reminder_id: reminders.select(:id))

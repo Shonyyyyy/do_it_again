@@ -12,12 +12,12 @@ class RecentsController < ApplicationController
     end
 
     def validate_user
-      reminder = Reminder.find params[:reminder_id]
-      annoyer = Annoyer.find reminder.annoyer_id
+      reminder = Reminder.find(params[:reminder_id])
+      annoyer = Annoyer.find(reminder.annoyer_id)
       if current_user.id == annoyer.user_id
         yield annoyer, reminder
       else
-        redirect_to root_path
+        redirect_to(root_path)
       end
     end
 end

@@ -11,11 +11,11 @@ class AnnoyersController < ApplicationController
   end
 
   def create
-    @annoyer = Annoyer.new annoyer_params
+    @annoyer = Annoyer.new(annoyer_params)
     if @annoyer.save
-      redirect_to @annoyer
+      redirect_to(@annoyer)
     else
-      render 'new'
+      render('new')
     end
   end
 
@@ -31,17 +31,17 @@ class AnnoyersController < ApplicationController
 
   def update
     @annoyer = Annoyer.find(params[:id])
-    if @annoyer.update annoyer_params
-      redirect_to @annoyer
+    if @annoyer.update(annoyer_params)
+      redirect_to(@annoyer)
     else
-      redirect_to edit_annoyer_path(@annoyer)
+      redirect_to(edit_annoyer_path(@annoyer))
     end
   end
 
   def destroy
     annoyer = Annoyer.find(params[:id])
     annoyer.destroy
-    redirect_to annoyers_path
+    redirect_to(annoyers_path)
   end
 
   private
@@ -52,13 +52,13 @@ class AnnoyersController < ApplicationController
     def validate_user
       annoyer = Annoyer.find(params[:id])
       if current_user.id != annoyer.user_id
-        redirect_to root_path
+        redirect_to(root_path)
       end
     end
 
     def valid_session
       if !current_user
-        redirect_to root_path
+        redirect_to(root_path)
       end
     end
 end

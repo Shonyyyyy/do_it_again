@@ -2,21 +2,21 @@ class NodesController < ApplicationController
   def create
     validate_user params.require(:node)['annoyer_id'] do |annoyer|
       @annoyer = annoyer
-      @node = Node.new node_params
+      @node = Node.new(node_params)
 
       if @node.save
-        redirect_to @annoyer
+        redirect_to(@annoyer)
       else
-        render 'annoyers/show'
+        render('annoyers/show')
       end
     end
   end
 
   def destroy
-    node = Node.find params[:id]
+    node = Node.find(params[:id])
     validate_user Annoyer.find(node.annoyer_id) do |annoyer|
       node.destroy
-      redirect_to annoyer_path(annoyer)
+      redirect_to(annoyer_path(annoyer))
     end
   end
 
@@ -25,12 +25,12 @@ class NodesController < ApplicationController
       params.require(:node).permit(:title, :content, :annoyer_id)
     end
 
-    def validate_user annoyer_id
-      annoyer = Annoyer.find annoyer_id
+    def validate_user(annoyer_id)
+      annoyer = Annoyer.find(annoyer_id)
       if current_user.id == annoyer.user_id
         yield annoyer
       else
-        redirect_to root_path
+        redirect_to(root_path)
       end
     end
 end
