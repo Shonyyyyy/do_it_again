@@ -5,9 +5,7 @@ class AnnoyersController < ApplicationController
   include AnnoyerDataCreator
 
   def index
-    annoyers = Annoyer.where(user_id: current_user.id)
-    @annoyers_data = index_annoyer_data(annoyers)
-    @latest_recents = index_recents_data(annoyers)
+    @presenter = AnnoyersOverview.new(current_user.id)
   end
 
   def new
