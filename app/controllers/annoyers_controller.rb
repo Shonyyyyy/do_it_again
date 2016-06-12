@@ -2,8 +2,6 @@ class AnnoyersController < ApplicationController
   before_action :validate_user, only: [:show, :edit, :update, :destroy]
   before_action :valid_session, only: [:new, :index, :create]
 
-  include AnnoyerDataCreator
-
   def index
     @presenter = AnnoyersOverview.new(current_user.id)
   end
