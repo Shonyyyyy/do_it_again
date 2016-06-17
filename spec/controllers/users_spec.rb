@@ -4,7 +4,6 @@ require 'rails_helper'
 describe UsersController do
   describe 'GET #new' do
     it 'assigns a new empty User' do
-      empty_user = User.new
       get :new
       expect(assigns(:user)).to be_a_new(User)
     end
@@ -13,7 +12,7 @@ describe UsersController do
   describe 'GET #create' do
     let(:valid_credentials) { { 'email' => 'test@example.com', 'password' => 'testpassword', 'password_confirmation' => 'testpassword' } }
     let(:invalid_credentials) { { 'email' => 'test@example.com', 'password' => 'testpassword', 'password_confirmation' => '' } }
-    
+
     context 'valid credentials' do
       it 'creates a new User' do
         expect{
