@@ -51,7 +51,11 @@ class AnnoyersController < ApplicationController
 
     def validate_user
       annoyer = Annoyer.find(params[:id])
-      if current_user.id != annoyer.user_id
+      if current_user
+        if current_user.id != annoyer.user_id
+          redirect_to(root_path)
+        end
+      else
         redirect_to(root_path)
       end
     end
