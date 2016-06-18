@@ -52,7 +52,7 @@ describe AnnoyersController do
       end
     end
 
-    context 'use invalid color for reminder' do
+    context 'use invalid color for annoyer' do
       it 'should not create a new annoyer' do
         expect{
           post :create, annoyer: invalid_annoyer_credentials
@@ -60,7 +60,7 @@ describe AnnoyersController do
       end
 
       it 'should render annoyers/show' do
-        post :create, reminder: invalid_reminder_credentials
+        post :create, annoyer: invalid_annoyer_credentials
         expect(response).to render_template('new')
       end
     end
