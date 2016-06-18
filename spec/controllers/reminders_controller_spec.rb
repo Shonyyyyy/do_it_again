@@ -36,7 +36,7 @@ describe RemindersController do
     end
 
     context 'use the wrong annoyer id for creation' do
-      it 'should create a new reminder with current annoyer_id' do
+      it 'should not create a new reminder' do
         expect{
           post :create, reminder: invalid_wrong_annoyer
         }.to_not change(Reminder, :count)
@@ -115,13 +115,13 @@ describe RemindersController do
     end
 
     context 'destroy the reminder' do
-      it 'should destroy the reminder' do
+      it 'should not destroy the reminder' do
         expect{
           delete :destroy, id: @reminder.id
         }.to change(Reminder, :count).by(0)
       end
 
-      it 'should redirect to annoyer_path' do
+      it 'should redirect to root_path' do
         delete :destroy, id: @reminder.id
         expect(response).to redirect_to(root_path)
       end
