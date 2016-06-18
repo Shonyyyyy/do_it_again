@@ -2,7 +2,7 @@ class RemindersController < ApplicationController
   def create
     validate_user(params.require(:reminder)['annoyer_id']) do |annoyer|
       @annoyer = annoyer
-      @reminder = Reminder.new(reminder_params.merge!(annoyer_id: annoyer.id))
+      @reminder = Reminder.new(reminder_params)
 
       if @reminder.save
         redirect_to(@annoyer)
@@ -22,7 +22,7 @@ class RemindersController < ApplicationController
 
   private
     def reminder_params
-      params.require(:reminder).permit(:title, :frequency, :repeat)
+      params.require(:reminder).permit(:title, :frequency, :repeat, :annoyer_id)
     end
 
     def validate_user(annoyer_id)

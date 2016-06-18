@@ -2,7 +2,7 @@ class NodesController < ApplicationController
   def create
     validate_user params.require(:node)['annoyer_id'] do |annoyer|
       @annoyer = annoyer
-      @node = Node.new(node_params.merge!(annoyer_id: annoyer.id))
+      @node = Node.new(node_params)
 
       if @node.save
         redirect_to(@annoyer)
@@ -22,7 +22,7 @@ class NodesController < ApplicationController
 
   private
     def node_params
-      params.require(:node).permit(:title, :content)
+      params.require(:node).permit(:title, :content, :annoyer_id)
     end
 
     def validate_user(annoyer_id)
