@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe UserSessionsController do
+  before(:each){ activate_authlogic }
+
   before do
     @user = User.create({ 'email' => 'valid_user@example.com', 'password' => 'abc123', 'password_confirmation' => 'abc123' })
   end
@@ -32,6 +34,7 @@ describe UserSessionsController do
 
     context 'invalid credentials' do
       it 'does not create a new User' do
+        UserSession.find.destroy
         post :create, user_session: invalid_credentials
         expect(UserSession.find).to eq(nil)
       end
