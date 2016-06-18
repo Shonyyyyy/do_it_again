@@ -46,7 +46,8 @@ class AnnoyersController < ApplicationController
 
   private
     def annoyer_params
-      params.require(:annoyer).permit(:title, :color, :user_id)
+      param = params.require(:annoyer).permit(:title, :color)
+      param.merge!(user_id: current_user.id)
     end
 
     def validate_user
