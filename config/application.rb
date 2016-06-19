@@ -24,5 +24,8 @@ module DoItAgain
     config.active_record.raise_in_transactional_callbacks = true
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
     config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths << Rails.root.join('app/graph')
+    config.autoload_paths << Rails.root.join('app/lib')
+    config.autoload_paths << Rails.root.join('app/graph/types')
   end
 end
