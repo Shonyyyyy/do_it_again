@@ -9,6 +9,124 @@ describe AnnoyersController do
     @invalid_user = User.create({ 'email' => 'invalid_user@example.com', 'password' => 'abc123', 'password_confirmation' => 'abc123' })
   end
 
+  describe '#GET edit when logged in' do
+    let(:valid_login_credentials) {{ 'email' => 'valid_user@example.com', 'password' => 'abc123' }}
+    let(:valid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+
+    before do
+      UserSession.create(valid_login_credentials)
+      @valid_annoyer = Annoyer.create(valid_annoyer_credentials)
+    end
+
+    context 'show certrain annoyer for editing' do
+      it 'should render edit template with certain annoyer' do
+        get :edit, id: @valid_annoyer.id
+        expect(assigns(:annoyer)).to eq(@valid_annoyer)
+      end
+    end
+  end
+
+  describe '#GET edit when not logged in' do
+    let(:valid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+
+    before do
+      UserSession.find.destroy
+      @valid_annoyer = Annoyer.create(valid_annoyer_credentials)
+    end
+
+    context 'show certain annoyer for editing' do
+      it 'should redirect to root_path since no session is active' do
+        get :edit, id: @valid_annoyer.id
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  describe '#PUT update when logged in' do
+    let(:valid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+    let(:valid_update_params) {{ 'user_id' => @valid_user.id, 'title' => 'The new Title', 'color' => 'fff000' }}
+    let(:invalid_update_params) {{ 'user_id' => @valid_user.id, 'title' => 'The', 'color' => 'fff000' }}
+    let(:invalid_annoyer_credentials) {{ 'user_id' => @invalid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+    let(:valid_login_credentials) {{ 'email' => 'valid_user@example.com', 'password' => 'abc123' }}
+
+    before do
+      UserSession.create(valid_login_credentials)
+      @valid_annoyer = Annoyer.create(valid_annoyer_credentials)
+      @invalid_annoyer = Annoyer.create(invalid_annoyer_credentials)
+    end
+
+    context 'update annoyer with correct update params' do
+      it 'should update the annoyer' do
+        put :update, id: @valid_annoyer.id, annoyer: valid_update_params
+        expect(Annoyer.find(@valid_annoyer.id).title).to eq(valid_update_params['title'])
+        expect(Annoyer.find(@valid_annoyer.id).color).to eq(valid_update_params['color'])
+      end
+
+      subject { put :update, id: @valid_annoyer.id, annoyer: valid_update_params }
+
+      it 'should redirect to annoyer' do
+        subject.should redirect_to(assigns(:annoyer))
+      end
+    end
+
+    context 'update annoyer with incorrect update params' do
+      it 'should not update the annoyer' do
+        put :update, id: @valid_annoyer.id, annoyer: invalid_update_params
+        expect(Annoyer.find(@valid_annoyer.id).title).to_not eq(invalid_update_params['title'])
+      end
+
+      subject { put :update, id: @valid_annoyer.id, annoyer: invalid_update_params }
+
+      it 'should redirect to edit_annoyer_path of certain annoyer' do
+        subject.should redirect_to(edit_annoyer_path(assigns(:annoyer)))
+      end
+    end
+  end
+
+  describe '#GET show when logged in' do
+    let(:valid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+    let(:invalid_annoyer_credentials) {{ 'user_id' => @invalid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+    let(:valid_login_credentials) {{ 'email' => 'valid_user@example.com', 'password' => 'abc123' }}
+
+    before do
+      UserSession.create(valid_login_credentials)
+      @valid_annoyer = Annoyer.create(valid_annoyer_credentials)
+      @invalid_annoyer = Annoyer.create(invalid_annoyer_credentials)
+    end
+
+    context 'show correct annoyer' do
+      it 'should assign the annoyer and show the annoyer template' do
+        get :show, id: @valid_annoyer.id
+        expect(assigns(:annoyer)).to eq(@valid_annoyer)
+        expect(assigns(:node)).to be_a_new(Node)
+        expect(assigns(:reminder)).to be_a_new(Reminder)
+      end
+    end
+
+    context 'show wrong annoyer' do
+      it 'should redirect to root_path' do
+        get :show, id: @invalid_annoyer.id
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  describe '#GET show when not logged in' do
+    let(:valid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
+
+    before do
+      UserSession.find.destroy
+      @valid_annoyer = Annoyer.create(valid_annoyer_credentials)
+    end
+
+    context 'show an annoyer' do
+      it 'should redirect to root_path' do
+        get :show, id: @valid_annoyer.id
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
   describe '#POST create when logged in' do
     let(:valid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'fff000' }}
     let(:invalid_annoyer_credentials) {{ 'user_id' => @valid_user.id, 'title' => 'Annoyer Title', 'color' => 'f' }}
