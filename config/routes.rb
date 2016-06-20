@@ -12,4 +12,11 @@ Rails.application.routes.draw do
   resources :reminders do
     resources :recents
   end
+
+  # graphql
+  post '/graphql', to: 'graphql#query'
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  # end graphql
 end
