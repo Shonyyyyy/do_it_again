@@ -3,7 +3,10 @@ class GraphqlController < ApplicationController
 
   def query
     variables = params[:variables] || {}
-    schema = GraphQL::Schema.new(query: QueryType)
+    schema = GraphQL::Schema.new(
+      query: QueryType,
+      mutation: MutationType
+      )
     result_hash = schema.execute(params[:query], variables: variables)
     render json: result_hash
   end
