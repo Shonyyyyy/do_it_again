@@ -1,55 +1,55 @@
-module AnnoyerMutations
+module NodeMutations
   Add = GraphQL::Relay::Mutation.define do
     # Used to name derived types:
-    name "AddAnnoyer"
+    name "AddNode"
 
     # Accessible from `input` in the resolve function:
-    input_field :user_id, !types.ID
+    input_field :annoyer_id, !types.ID
     input_field :title, !types.String
-    input_field :color, !types.String
+    input_field :content, !types.String
 
     # The result has access to these fields,
     # resolve must return a hash with these keys
-    return_field :annoyer, AnnoyerType
+    return_field :node, NodeType
 
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
-      annoyer = Annoyer.create(user_id: inputs[:user_id], title: inputs[:title], color: inputs[:color])
-      {annoyer: annoyer}
+      node = Node.create(annoyer_id: inputs[:annoyer_id], title: inputs[:title], content: inputs[:content])
+      {node: node}
     }
   end
 
   Update = GraphQL::Relay::Mutation.define do
     # Used to name derived types:
-    name "UpdateAnnoyer"
+    name "UpdateNode"
 
     # Accessible from `input` in the resolve function:
-    input_field :annoyer_id, !types.ID
+    input_field :node_id, !types.ID
     input_field :title, !types.String
-    input_field :color, !types.String
+    input_field :content, !types.String
 
     # The result has access to these fields,
     # resolve must return a hash with these keys
-    return_field :annoyer, AnnoyerType
+    return_field :node, NodeType
 
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
-      annoyer = Annoyer.find(inputs[:annoyer_id])
-      annoyer.update(title: inputs[:title], color: inputs[:color])
-      {annoyer: annoyer}
+      node = Node.find(inputs[:node_id])
+      node.update(title: inputs[:title], content: inputs[:content])
+      {node: node}
     }
   end
 
   Destroy = GraphQL::Relay::Mutation.define do
-    name "destroyAnnoyer"
+    name "destroyNode"
 
-    input_field :annoyer_id, !types.ID
+    input_field :node_id, !types.ID
 
     return_field :deleted_id, !types.ID
 
     resolve -> (inputs, ctx) {
-      Annoyer.destroy(inputs[:annoyer_id])
-      {deleted_id: inputs[:annoyer_id]}
+      Node.destroy(inputs[:node_id])
+      {deleted_id: inputs[:node_id]}
     }
   end
 end
