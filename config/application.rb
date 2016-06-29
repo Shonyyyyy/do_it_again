@@ -26,6 +26,7 @@ module DoItAgain
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths << Rails.root.join('app/graph')
     config.autoload_paths << Rails.root.join('app/lib')
-    config.autoload_paths << Rails.root.join('app/graph/types')
+    config.autoload_paths << Rails.root.join('app/graph/query_types')
+    config.autoload_paths << Rails.root.join('app/graph/mutation_types')
   end
 end

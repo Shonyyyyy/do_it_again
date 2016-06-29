@@ -15,8 +15,12 @@ module ReminderMutations
 
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
-      reminder = Reminder.create(annoyer_id: inputs[:annoyer_id], title: inputs[:title], frequency: inputs[:frequency], repeat: inputs[:repeat])
-      {reminder: reminder}
+      if UserSession.find.user.id == Annoyer.find(inputs[:annoyer_id]).user_id
+        reminder = Reminder.create(annoyer_id: inputs[:annoyer_id], title: inputs[:title], frequency: inputs[:frequency], repeat: inputs[:repeat])
+        {reminder: reminder}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 
@@ -37,8 +41,12 @@ module ReminderMutations
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
       reminder = Reminder.find(inputs[:reminder_id])
-      reminder.update(title: inputs[:title], frequency: inputs[:frequency], repeat: inputs[:repeat])
-      {reminder: reminder}
+      if UserSession.find.user.id == reminder.annoyer.user_id
+        reminder.update(title: inputs[:title], frequency: inputs[:frequency], repeat: inputs[:repeat])
+        {reminder: reminder}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 
@@ -50,8 +58,12 @@ module ReminderMutations
     return_field :deleted_id, !types.ID
 
     resolve -> (inputs, ctx) {
-      Reminder.destroy(inputs[:reminder_id])
-      {deleted_id: inputs[:reminder_id]}
+      if UserSession.find.user.id == Reminder.find(inputs[:reminder_id]).annoyer.user_id
+        reminder.destroy
+        {deleted_id: inputs[:reminder_id]}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 end

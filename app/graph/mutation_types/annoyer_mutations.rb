@@ -14,8 +14,12 @@ module AnnoyerMutations
 
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
-      annoyer = Annoyer.create(user_id: inputs[:user_id], title: inputs[:title], color: inputs[:color])
-      {annoyer: annoyer}
+      if UserSession.find.user.id == inputs[:user_id]
+        annoyer = Annoyer.create(user_id: inputs[:user_id], title: inputs[:title], color: inputs[:color])
+        {annoyer: annoyer}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 
@@ -35,8 +39,12 @@ module AnnoyerMutations
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
       annoyer = Annoyer.find(inputs[:annoyer_id])
-      annoyer.update(title: inputs[:title], color: inputs[:color])
-      {annoyer: annoyer}
+      if UserSession.find.user.id == annoyer.user_id
+        annoyer.update(title: inputs[:title], color: inputs[:color])
+        {annoyer: annoyer}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 
@@ -48,8 +56,12 @@ module AnnoyerMutations
     return_field :deleted_id, !types.ID
 
     resolve -> (inputs, ctx) {
-      Annoyer.destroy(inputs[:annoyer_id])
-      {deleted_id: inputs[:annoyer_id]}
+      if UserSession.find.user.id == Annoyer.find(inputs[:annoyer_id]).user_id
+        Annoyer.destroy(inputs[:annoyer_id])
+        {deleted_id: inputs[:annoyer_id]}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 end

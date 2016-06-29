@@ -14,8 +14,12 @@ module NodeMutations
 
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
-      node = Node.create(annoyer_id: inputs[:annoyer_id], title: inputs[:title], content: inputs[:content])
-      {node: node}
+      if UserSession.find.user.id == Annoyer.find(inputs[:annoyer_id]).user_id
+        node = Node.create(annoyer_id: inputs[:annoyer_id], title: inputs[:title], content: inputs[:content])
+        {node: node}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 
@@ -35,8 +39,12 @@ module NodeMutations
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
       node = Node.find(inputs[:node_id])
-      node.update(title: inputs[:title], content: inputs[:content])
-      {node: node}
+      if UserSession.find.user.id == node.annoyer.user_id
+        node.update(title: inputs[:title], content: inputs[:content])
+        {node: node}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 
@@ -48,8 +56,12 @@ module NodeMutations
     return_field :deleted_id, !types.ID
 
     resolve -> (inputs, ctx) {
-      Node.destroy(inputs[:node_id])
-      {deleted_id: inputs[:node_id]}
+      if UserSession.find.user.id == Node.find(inputs[:node_id]).annoyer.user_id
+        Node.destroy(inputs[:node_id])
+        {deleted_id: inputs[:node_id]}
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 end
