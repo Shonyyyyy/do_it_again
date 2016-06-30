@@ -14,7 +14,7 @@ module AnnoyerMutations
 
     # The resolve proc is where you alter the system state.
     resolve -> (inputs, ctx) {
-      if UserSession.find.user.id == inputs[:user_id]
+      if UserSession.find.user.id == inputs[:user_id].to_i
         annoyer = Annoyer.create(user_id: inputs[:user_id], title: inputs[:title], color: inputs[:color])
         {annoyer: annoyer}
       else
