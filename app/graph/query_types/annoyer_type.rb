@@ -10,22 +10,22 @@ AnnoyerType = GraphQL::ObjectType.define do
     type !types[!NodeType]
 
     description "Nodes of this Annoyer"
+    argument :limit, types.Int
 
     resolve -> (obj, args, ctx) do
-       Node.where(
-         annoyer_id: obj.id
-       )
-     end
+      limit = args[:limit] ? args[:limit] : nil
+      Node.where(annoyer_id: obj.id).limit(limit)
+    end
   end
   field :reminders do
     type !types[!ReminderType]
 
     description "Reminders of this Annoyer"
+    argument :limit, types.Int
 
     resolve -> (obj, args, ctx) do
-       Reminder.where(
-         annoyer_id: obj.id
-       )
-     end
+      limit = args[:limit] ? args[:limit] : nil
+      Reminder.where(annoyer_id: obj.id).limit(limit)
+    end
   end
 end

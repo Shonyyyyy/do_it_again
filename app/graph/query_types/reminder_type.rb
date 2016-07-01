@@ -13,9 +13,7 @@ ReminderType = GraphQL::ObjectType.define do
     description "Recents of this Reminder"
 
     resolve -> (obj, args, ctx) do
-       Recent.where(
-         reminder_id: obj.id
-       )
-     end
+      Recent.where(reminder_id: obj.id)
+    end
   end
 end
