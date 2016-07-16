@@ -6,6 +6,12 @@ AnnoyerType = GraphQL::ObjectType.define do
   field :title, types.String, "The title of this annoyer"
   field :color, types.String, "The color of this annoyer"
   field :created_at, types.String, "The time at which this annoyer was created"
+  field :user do
+    type !types[!UserType]
+    resolve -> (obj, args, ctx) do
+      User.where(id: obj.user_id)
+    end
+  end
   field :nodes do
     type !types[!NodeType]
 
