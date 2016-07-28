@@ -12,4 +12,6 @@ MutationType = GraphQL::ObjectType.define do
   field :addReminder, field: ReminderMutations::Add.field
   field :updateReminder, field: ReminderMutations::Update.field
   field :destroyReminder, field: ReminderMutations::Destroy.field
+
+  field :addRecent, field: RecentMutations::Add.field
 end
