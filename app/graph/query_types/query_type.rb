@@ -7,7 +7,12 @@ QueryType = GraphQL::ObjectType.define do
     argument :id, !types.ID
     description 'Root object to get viewer related collections'
     resolve -> (obj, args, ctx) {
-      Annoyer.find(args["id"])
+      annoyer = Annoyer.find(args["id"])
+      if UserSession.find.user.id == annoyer.user_id
+        Annoyer.find(args["id"])
+      else
+        raise StandardError.new("No Permission, since no valid UserSession")
+      end
     }
   end
 end
