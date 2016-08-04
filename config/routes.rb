@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   # graphql
   post '/graphql', to: 'graphql#query'
   if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+    mount GraphiQL::Rails::Engine,
+    at: "/graphiql",
+    graphql_path: "/graphql"
   end
   # end graphql
 end
