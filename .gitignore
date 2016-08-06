@@ -17,7 +17,9 @@ pickle-email-*.html
 vendor/
 /vendor/
 /vendor
-
+/app/assets/javascripts/
+/node_modules/
+/.vendor/
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
 config/secrets.yml
