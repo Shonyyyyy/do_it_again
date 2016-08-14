@@ -1,28 +1,12 @@
 %h1= @annoyer.title
-#react-id
 %hr
 .row
   .col-md-8.col-md-offset-2
-    %h3 Nodes and Posts
-    .panel.panel-default
-      .panel-heading{ :style => "background-color:##{@annoyer.color};color:#fff;opacity:0.6;" } Nodes
-      .panel-body
-        - if @annoyer.nodes.any?
-          = render @annoyer.nodes
-        - else
-          %i there are no nodes that could help you
-.row
-  .col-md-8.col-md-offset-2
-    = render :partial => 'nodes/form'
+    #nodes_container
 %hr
 .row
   .col-md-8.col-md-offset-2
-    %h3 Your reminders:
-    .list-group
-      - if @annoyer.reminders.any?
-        = render @annoyer.reminders
-      - else
-        %i you haven't created any reminders yet
+    #reminders_container
 .row
   .col-md-8.col-md-offset-2
     = render :partial => 'reminders/form'
