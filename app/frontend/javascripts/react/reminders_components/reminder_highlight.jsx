@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export class RemindersHighlight extends React.Component {
+export class ReminderHighlight extends React.Component {
   labelStyle(){
     return {
       backgroundColor: this.props.color,
