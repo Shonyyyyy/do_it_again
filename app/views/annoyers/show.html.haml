@@ -7,9 +7,6 @@
 .row
   .col-md-8.col-md-offset-2
     #reminders_container
-.row
-  .col-md-8.col-md-offset-2
-    = render :partial => 'reminders/form'
 %hr
 = link_to annoyer_path(@annoyer), method: :delete, data: { confirm: 'Are you sure?' } do
   %span.btn.btn-danger.btn-sm.pull-right{ :style => "margin-bottom:20px;" }

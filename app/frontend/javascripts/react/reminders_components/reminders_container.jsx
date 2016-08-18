@@ -9,6 +9,7 @@ export class RemindersContainer extends React.Component {
       <div>
         <h3>Your Reminders</h3>
         <RemindersList></RemindersList>
+        <RemindersForm></RemindersForm>
       </div>
     )
   }

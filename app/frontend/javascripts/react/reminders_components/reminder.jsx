@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {ReminderHighlight} from "./reminders_highlight";
+import {ReminderHighlight} from "./reminder_highlight";
 
 export class Reminder extends React.Component {
   divLineStyle() {
