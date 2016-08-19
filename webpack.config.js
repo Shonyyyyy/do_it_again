@@ -7,7 +7,7 @@ var config = module.exports = {
   // the main entry point for our application's frontend JS
   entry: {
     core: './app/frontend/javascripts/core.es6.js',
-    react_compiled: './app/frontend/javascripts/react_compiled.es6.js'
+    react_compiled: './app/frontend/javascripts/react_compiled.es6.jsx'
   }
 };
 
@@ -38,21 +38,23 @@ config.module = {
       loader: 'coffee-loader'
     },
     {
-      test: /.jsx?$/,
-      loader: 'babel-loader',
+      test: /\.es6\.jsx$/,
+      loader: 'babel',
       exclude: /node_modules/,
       query: {
-        presets: [
-          {
-            'plugins': [
-              './babelRelayPlugin'
-            ]
-          },
-          'es2015',
-          'react'
-        ],
+        plugins: ['react-relay'],
+        presets: ['es2015','react'],
       }
-    }
+    },
+    {
+      test: /\.es6\.js$/,
+      loader: 'babel',
+      exclude: /node_modules/,
+      query: {
+        plugins: ['react-relay'],
+        presets: ['es2015'],
+      }
+    },
   ],
 };
 
