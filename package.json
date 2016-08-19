@@ -10,8 +10,6 @@
     "exports-loader": "0.6.3",
     "expose-loader": "0.7.1",
     "imports-loader": "0.6.5",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
     "webpack": "1.13.1"
   },
   "dependencies": {
@@ -19,6 +17,11 @@
     "coffee-script": "^1.10.0",
     "jquery": "^2.1.0",
     "jquery-ujs": "*",
-    "turbolinks": "*"
+    "turbolinks": "*",
+    "babel-relay-plugin": "0.9.2",
+    "graphql": "*",
+    "react-relay": "0.9.2",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
   }
 }

@@ -42,7 +42,15 @@ config.module = {
       loader: 'babel-loader',
       exclude: /node_modules/,
       query: {
-        presets: ['es2015', 'react']
+        presets: [
+          {
+            'plugins': [
+              './babelRelayPlugin'
+            ]
+          },
+          'es2015',
+          'react'
+        ],
       }
     }
   ],
